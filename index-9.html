@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Persis Place Restaurant — Ganaja Road, Lokoja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#211d1a;
+    --cream:#f7eee1;
+    --tomato:#c1442d;
+    --tomato-deep:#8f2f1e;
+    --olive:#5c6b3f;
+    --gold:#e8a93c;
+    --line: rgba(247,238,225,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Newsreader', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+
+  .stripe{
+    height:9px;
+    background:repeating-linear-gradient(
+      -45deg,
+      var(--tomato) 0px, var(--tomato) 16px,
+      var(--gold) 16px, var(--gold) 24px,
+      var(--olive) 24px, var(--olive) 40px
+    );
+  }
+
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(33,29,26,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .brandmark{
+    font-family:'Newsreader', serif; font-weight:700; font-size:1.3rem;
+  }
+  .brandmark .dot{color:var(--gold);}
+  nav ul{list-style:none; display:flex; gap:26px; font-size:0.9rem;}
+  nav ul a{text-decoration:none; opacity:0.8;}
+  nav ul a:hover{opacity:1;}
+  .nav-cta{
+    display:none;
+  }
+  @media(min-width:640px){
+    .nav-cta{
+      display:inline-block;
+      background:var(--tomato); color:var(--cream);
+      padding:10px 18px; border-radius:2px;
+      font-weight:600; font-size:0.85rem; text-decoration:none;
+    }
+  }
+
+  header.hero{
+    padding:88px 0 64px;
+  }
+  .eyebrow{
+    text-transform:uppercase; letter-spacing:0.18em; font-size:0.75rem;
+    color:var(--gold); margin-bottom:20px; font-weight:600;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 6.6vw, 4.6rem);
+    line-height:1.03;
+    max-width:13ch;
+  }
+  .hero .sub{
+    margin-top:24px; max-width:48ch; font-size:1.05rem; opacity:0.85;
+  }
+  .hero-actions{
+    margin-top:34px; display:flex; gap:16px; flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block; padding:14px 26px; font-weight:600;
+    text-decoration:none; font-size:0.95rem; border-radius:2px;
+  }
+  .btn-primary{background:var(--tomato); color:var(--cream);}
+  .btn-ghost{border:1px solid var(--line); color:var(--cream);}
+
+  .hero-meta{
+    margin-top:56px; display:grid; grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line); padding-top:22px; gap:20px;
+  }
+  .hero-meta .num{font-family:'Newsreader',serif; font-size:1.7rem; color:var(--gold);}
+  .hero-meta .lab{font-size:0.76rem; opacity:0.7; margin-top:4px;}
+
+  .hero-img{
+    margin-top:40px; width:100%; max-height:420px; object-fit:cover;
+    border-radius:6px; border:1px solid var(--line);
+  }
+
+  section{padding:72px 0;}
+  .section-head{
+    margin-bottom:38px;
+  }
+  .section-head h2{font-size:clamp(1.7rem,4vw,2.4rem);}
+  .section-tag{font-size:0.78rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--gold); font-weight:600; margin-bottom:10px;}
+
+  .menu-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:1px; background:var(--line); border:1px solid var(--line);
+  }
+  .menu-item{
+    background:var(--ink); padding:26px;
+  }
+  .menu-item .row{display:flex; justify-content:space-between; align-items:baseline; gap:14px;}
+  .menu-item h3{font-size:1.15rem;}
+  .menu-item .price{color:var(--gold); font-weight:600; white-space:nowrap; font-family:'Newsreader',serif; font-size:1.1rem;}
+  .menu-item p{font-size:0.86rem; opacity:0.72; margin-top:8px;}
+  .menu-img{
+    width:100%; height:180px; object-fit:cover; border-radius:4px; margin-top:14px;
+  }
+
+  .price-list{border:1px solid var(--line); border-top:none;}
+  .price-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 26px; border-top:1px solid var(--line);
+    font-size:0.98rem;
+  }
+  .price-row .price{color:var(--gold); font-weight:600; font-family:'Newsreader',serif;}
+
+  .combo-band{
+    background:var(--tomato-deep);
+    padding:56px 0;
+  }
+  .combo-card{
+    display:flex; justify-content:space-between; align-items:center;
+    gap:24px; flex-wrap:wrap;
+  }
+  .combo-card h2{font-size:clamp(1.5rem,3.6vw,2.1rem); max-width:20ch;}
+  .combo-card p{margin-top:12px; opacity:0.88; max-width:42ch; font-size:0.95rem;}
+  .combo-price{
+    text-align:right;
+  }
+  .combo-price .amount{font-family:'Newsreader',serif; font-size:2.2rem; color:var(--gold);}
+  .combo-price .note{font-size:0.78rem; opacity:0.75; margin-top:2px;}
+
+  .gallery-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:14px;
+  }
+  .gallery-grid img{
+    width:100%; height:220px; object-fit:cover; border-radius:6px; border:1px solid var(--line);
+  }
+
+  .reviews-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+    gap:22px;
+  }
+  .review-card{border:1px solid var(--line); padding:24px; border-radius:2px;}
+  .stars{color:var(--gold); letter-spacing:2px;}
+  .review-card p{margin-top:12px; font-size:0.93rem; opacity:0.85;}
+  .review-card .who{margin-top:14px; font-size:0.78rem; opacity:0.6;}
+
+  .info-grid{display:grid; grid-template-columns:1fr 1fr; gap:44px;}
+  @media(max-width:760px){.info-grid{grid-template-columns:1fr;}}
+  .hours-row{
+    display:flex; justify-content:space-between; padding:11px 0;
+    border-top:1px solid var(--line); font-size:0.93rem;
+  }
+  .hours-row:last-child{border-bottom:1px solid var(--line);}
+  .loc-card{border:1px solid var(--line); padding:26px; border-radius:2px;}
+  .loc-card p{opacity:0.85; margin-top:8px; font-size:0.93rem;}
+
+  .cta-band{
+    background:var(--gold); color:var(--ink); text-align:center; padding:64px 0;
+  }
+  .cta-band h2{font-size:clamp(1.7rem,4vw,2.5rem); max-width:16ch; margin:0 auto;}
+  .cta-band .btn-primary{background:var(--ink); color:var(--cream); margin-top:24px;}
+
+  footer{padding:36px 0; text-align:center; font-size:0.8rem; opacity:0.6;}
+
+  @media(max-width:640px){
+    .hero-meta{grid-template-columns:1fr; gap:12px;}
+    .combo-card{flex-direction:column; align-items:flex-start;}
+    .combo-price{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brandmark">PERSIS <span class="dot">·</span> PLACE</div>
+    <ul>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#combo">Combo</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/2348166546683?text=Hi%20Persis%20Place%2C%20I%27d%20like%20to%20place%20an%20order" target="_blank" rel="noopener">Order on WhatsApp</a>
+  </div>
+</nav>
+
+<div class="stripe"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Ganaja Road · Lokoja</div>
+    <h1>Real food, cooked slow, served fast.</h1>
+    <p class="sub">Jollof, fried rice, asun, swallows and more — made fresh daily on Ganaja Road. Dine in, takeout, or call ahead and it'll be ready when you arrive.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://wa.me/2348166546683?text=Hi%20Persis%20Place%2C%20I%27d%20like%20to%20place%20an%20order" target="_blank" rel="noopener">Order on WhatsApp — 0816 654 6683</a>
+      <a class="btn btn-ghost" href="tel:+2348166546683">Call to Order</a>
+      <a class="btn btn-ghost" href="#menu">See the menu</a>
+    </div>
+    <img class="hero-img" src="jollof-chicken-plantain.jpg" alt="Jollof rice with grilled chicken, plantain and coleslaw">
+    <div class="hero-meta">
+      <div><div class="num">4.3★</div><div class="lab">Rated by diners</div></div>
+      <div><div class="num">₦1k–10k</div><div class="lab">Typical meal price</div></div>
+      <div><div class="num">Til 10pm</div><div class="lab">Open daily</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="stripe"></div>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Rice Dishes</div>
+      <h2>Every plate, made to order.</h2>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="row"><h3>Jollof Rice</h3><span class="price">₦1,000</span></div>
+        <p>A deep reddish-orange rice, slow-cooked in seasoned tomato and pepper sauce until smoky and rich — each grain separate, never soggy.</p>
+        <img class="menu-img" src="jollof-chicken-plantain.jpg" alt="Jollof Rice with grilled chicken and plantain">
+      </div>
+      <div class="menu-item">
+        <div class="row"><h3>Fried Rice</h3><span class="price">₦1,200</span></div>
+        <p>Colourful and aromatic, loaded with carrots, green peas, sweet corn and spring onions for a fresh, balanced bite.</p>
+        <img class="menu-img" src="party-tray.jpg" alt="Shrimp fried rice on our party tray spread">
+      </div>
+      <div class="menu-item">
+        <div class="row"><h3>Asun Rice</h3><span class="price">₦2,000</span></div>
+        <p>A bold special — rice infused with a sautéed pepper blend, garnished generously with tender goat meat.</p>
+        <img class="menu-img" src="beef-friedrice.jpg" alt="Peppered beef with fried rice">
+      </div>
+      <div class="menu-item">
+        <div class="row"><h3>White Rice & Fish</h3><span class="price">Ask in-store</span></div>
+        <p>Steamed white rice served with grilled fish, boiled egg and a fiery pepper sauce.</p>
+        <img class="menu-img" src="rice-fish-pepper.jpg" alt="White rice with grilled fish, boiled egg and pepper sauce">
+      </div>
+      <div class="menu-item">
+        <div class="row"><h3>Ofada Rice</h3><span class="price">₦1,500</span></div>
+        <p>Native brown rice served warm with a rich, slow-cooked peppered beef stew.</p>
+        <img class="menu-img" src="ofadarice-beefstew.jpg" alt="Native brown rice with peppered beef stew">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Native & Party Rice</div>
+      <h2>Big trays, bold flavour.</h2>
+    </div>
+    <div class="gallery-grid">
+      <img src="nativejollof-tray.jpg" alt="Native jollof rice in party tray">
+      <img src="nativejollof-dome.jpg" alt="Native jollof rice with meat, dome plated">
+      <img src="friedrice-collage.jpg" alt="Fried rice with assorted grilled meat">
+      <img src="yellow-fried-rice.jpg" alt="Yellow fried rice with peas, carrots and chicken">
+      <img src="ofadarice-ayamase.jpg" alt="Ofada rice with ayamase stew, egg and gizzard">
+      <img src="friedrice-meat.jpg" alt="Fried rice with grilled meat and tomato garnish">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Swallows</div>
+      <h2>Paired with your favourite soup.</h2>
+    </div>
+    <div class="price-list">
+      <div class="price-row"><span>Semo</span><span class="price">₦1,000</span></div>
+      <div class="price-row"><span>Eba</span><span class="price">₦1,000</span></div>
+      <div class="price-row"><span>Akpu</span><span class="price">₦1,000</span></div>
+      <div class="price-row"><span>Amala</span><span class="price">₦1,000</span></div>
+      <div class="price-row"><span>Wheat</span><span class="price">₦1,000</span></div>
+      <div class="price-row"><span>Pounded Yam</span><span class="price">₦1,200</span></div>
+    </div>
+    <div class="gallery-grid" style="margin-top:28px;">
+      <img src="poundedyam-veg.jpg" alt="Pounded yam with vegetable soup and beef">
+      <img src="poundedyam-egusi.jpg" alt="Pounded yam with egusi soup, meat and snail">
+      <img src="amala-veg-chicken.jpg" alt="Amala with vegetable soup, chicken and sausage roll">
+      <img src="amala-egusi.jpg" alt="Amala with egusi soup and egg stew garnish">
+      <img src="eggstew-yam.jpg" alt="Egg stew with boiled yam">
+      <img src="egg-sauce-plantain.jpg" alt="Egg sauce with boiled plantain">
+      <img src="swallow-banga-crab.jpg" alt="Swallow with banga-style soup, crab and beef">
+      <img src="swallow-egusi-meat.jpg" alt="Swallow with egusi soup and meat">
+      <img src="starch-wrap.jpg" alt="Starch swallow">
+      <img src="vegetable-soup.jpg" alt="Vegetable soup">
+      <img src="vegetable-soup-meat.jpg" alt="Vegetable soup with meat">
+      <img src="vegetable-soup-fish.jpg" alt="Vegetable soup with fish">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Extras</div>
+      <h2>Top up your plate.</h2>
+    </div>
+    <div class="price-list">
+      <div class="price-row"><span>Beef</span><span class="price">₦500</span></div>
+      <div class="price-row"><span>Pomo</span><span class="price">₦500</span></div>
+      <div class="price-row"><span>Intestine</span><span class="price">₦500</span></div>
+      <div class="price-row"><span>Dry Fish</span><span class="price">₦3,000</span></div>
+      <div class="price-row"><span>Porridge Beans</span><span class="price">₦1,000</span></div>
+    </div>
+    <div class="gallery-grid" style="margin-top:28px;">
+      <img src="beef.jpg" alt="Beef">
+      <img src="dryfish.jpg" alt="Dry fish">
+      <img src="beans-porridge.jpg" alt="Beans porridge">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Snacks</div>
+      <h2>Something quick, something warm.</h2>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="row"><h3>Meat Pie</h3><span class="price">₦900</span></div>
+        <p>Warm, juicy filling packed with seasoned minced meat, diced potatoes, carrots and onions in flaky pastry.</p>
+        <img class="menu-img" src="meatpie-drumsticks.jpg" alt="Meat pie with fried chicken drumsticks">
+      </div>
+      <div class="menu-item">
+        <div class="row"><h3>Egg Roll</h3><span class="price">₦600</span></div>
+        <p>Freshly fried dough, warm and buttery, wrapped around a firm, moist boiled egg at the centre.</p>
+        <img class="menu-img" src="puffpuff.jpg" alt="Freshly fried puff puff">
+      </div>
+      <div class="menu-item">
+        <div class="row"><h3>Fried Plantain</h3><span class="price">Ask in-store</span></div>
+        <p>Sweet, golden plantain slices fried to a soft, caramelised finish.</p>
+        <img class="menu-img" src="fried-plantain.jpg" alt="Fried plantain slices">
+      </div>
+      <div class="menu-item">
+        <div class="row"><h3>Snack Platter</h3><span class="price">Ask in-store</span></div>
+        <p>A mixed tray of puff puff, chin chin, spring rolls and crispy fried chicken — perfect for sharing.</p>
+        <img class="menu-img" src="snacks-platter.jpg" alt="Snack platter with puff puff, chin chin, spring rolls and fried chicken">
+      </div>
+      <div class="menu-item">
+        <div class="row"><h3>Grilled Drumstick</h3><span class="price">Ask in-store</span></div>
+        <p>Char-grilled chicken drumstick, seasoned and smoked for a deep, savoury bite. Great on the go.</p>
+        <img class="menu-img" src="grilled-drumstick-bag.jpg" alt="Grilled chicken drumstick with Persis Place takeout bag">
+      </div>
+      <div class="menu-item">
+        <div class="row"><h3>Spaghetti Special</h3><span class="price">Ask in-store</span></div>
+        <p>Spicy jollof-style spaghetti tossed with carrots and green peas, topped with a well-seasoned grilled chicken drumstick.</p>
+        <img class="menu-img" src="spaghetti.jpg" alt="Spaghetti with chicken drumsticks">
+      </div>
+      <div class="menu-item">
+        <div class="row"><h3>Popcorn</h3><span class="price">₦700</span></div>
+        <p>Freshly popped and packed, sweet and crunchy — great for snacking on the go.</p>
+        <img class="menu-img" src="popcorn.jpg" alt="Bagged popcorn">
+      </div>
+      <div class="menu-item">
+        <div class="row"><h3>Cupcake</h3><span class="price">₦600</span></div>
+        <p>Soft, moist cupcakes baked fresh daily in a mix of classic and fruity flavours.</p>
+        <img class="menu-img" src="cupcake.jpg" alt="Assorted mini cakes and cupcakes">
+      </div>
+      <div class="menu-item">
+        <div class="row"><h3>Chin Chin</h3><span class="price"></span></div>
+        <p>Crunchy, lightly sweetened fried dough bites — a classic snack, perfect for sharing.</p>
+        <img class="menu-img" src="chinchin.jpg" alt="Chin chin">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Parfait & Drinks</div>
+      <h2>A little something sweet.</h2>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="row"><h3>Fruit & Yoghurt Parfait</h3><span class="price">₦3,000</span></div>
+        <p>Layers of creamy yoghurt, fresh fruit and crunchy granola — a light, refreshing treat.</p>
+        <img class="menu-img" src="parfait.jpg" alt="Fruit and yoghurt granola parfait">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="combo-band" id="combo">
+  <div class="wrap">
+    <div class="combo-card">
+      <div>
+        <div class="section-tag" style="color:var(--gold);">Cake & Full Meal Combo</div>
+        <h2>Celebrate better with Persis Place.</h2>
+        <p>A decorated cake, assorted meals, chicken, fruits, drinks and water — perfect for birthdays, office treats and special occasions.</p>
+      </div>
+      <div class="combo-price">
+        <div class="amount">₦35,000</div>
+        <div class="note">Order ahead — call to arrange</div>
+      </div>
+    </div>
+    <img src="party-tray.jpg" alt="Party tray with jollof, ogbono, efo riro, shrimp fried rice and asun" style="width:100%; max-height:340px; object-fit:cover; border-radius:6px; margin-top:36px; border:1px solid rgba(247,238,225,0.25);">
+    <div class="gallery-grid" style="margin-top:14px;">
+      <img src="combo-box.jpg" alt="Persis Place combo box with jollof, spaghetti, fried rice, grilled chicken and drinks">
+      <img src="cake-combo.jpg" alt="Decorated cake and full meal combo box">
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Full Menu</div>
+      <h2>See every dish, every price.</h2>
+    </div>
+    <img src="menu-poster.jpg" alt="Persis Place full menu with prices" style="width:100%; max-width:520px; display:block; margin:0 auto; border-radius:6px; border:1px solid var(--line);">
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">What diners say</div>
+      <h2>4.3 stars on Google</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>The jollof rice actually tastes homemade — not the usual fast food version. Generous portions too.</p>
+        <div class="who">— Google review</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★☆</div>
+        <p>Ordered the combo package for a birthday and it was a hit — the cake and meals arrived fresh and on time.</p>
+        <div class="who">— Google review</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>Asun rice is worth the trip alone. Clean space, quick service, good for a sit-down meal or takeout.</p>
+        <div class="who">— Google review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Find us</div>
+      <h2>Hours & location</h2>
+    </div>
+    <div class="info-grid">
+      <div>
+        <div class="hours-row"><span>Monday – Sunday</span><span>Open — Closes 10:00 PM</span></div>
+        <p style="margin-top:14px; font-size:0.82rem; opacity:0.6;">Full weekly hours to be confirmed with the restaurant — this reflects today's listed hours.</p>
+      </div>
+      <div class="loc-card">
+        <div class="section-tag">Address</div>
+        <p>Shop 1-3, 1st 200 Housing Unit Junction,<br>No 612 Ganaja Road, Lokoja 260101, Kogi</p>
+        <div class="section-tag" style="margin-top:18px;">Phone</div>
+        <p>0816 654 6683</p>
+        <div class="section-tag" style="margin-top:18px;">Email</div>
+        <p><a href="mailto:persisplace247@gmail.com">persisplace247@gmail.com</a></p>
+        <a class="btn btn-primary" style="margin-top:20px;" href="https://wa.me/2348166546683?text=Hi%20Persis%20Place%2C%20I%27d%20like%20to%20place%20an%20order" target="_blank" rel="noopener">Order on WhatsApp →</a>
+        <a class="btn btn-ghost" style="margin-top:10px;" href="tel:+2348166546683">Call to Order →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="wrap">
+    <h2>Hungry? Your order is one call away.</h2>
+    <a class="btn btn-primary" href="https://wa.me/2348166546683?text=Hi%20Persis%20Place%2C%20I%27d%20like%20to%20place%20an%20order" target="_blank" rel="noopener">Order on WhatsApp</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">Persis Place Restaurant · Ganaja Road, Lokoja · <a href="mailto:persisplace247@gmail.com">persisplace247@gmail.com</a> · <a href="https://wa.me/2348166546683" target="_blank" rel="noopener">WhatsApp: 0816 654 6683</a></div>
+</footer>
+
+</body>
+</html>
